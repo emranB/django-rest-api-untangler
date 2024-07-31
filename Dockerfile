@@ -1,23 +1,23 @@
-# Use an official Python runtime as a parent image
-FROM python:3.8-slim
+FROM python:3.9-slim
 
-# Set the working directory
-WORKDIR /app
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
-# Copy the current directory contents into the container
-COPY . /app
-
-# Install Poetry
-RUN pip install poetry
+# Set work directory
+WORKDIR /code
 
 # Install dependencies
+COPY pyproject.toml poetry.lock /code/
+RUN pip install --upgrade pip
+RUN pip install poetry
 RUN poetry install
 
-# Make port 8000 available to the world outside this container
+# Copy project
+COPY . /code/
+
+# Expose the port the app runs on
 EXPOSE 8000
 
-# Define environment variable
-ENV NAME World
-
 # Run the application
-CMD ["poetry", "run", "django-restapi-untangling"]
+CMD ["poetry", "run", "django-rest-api-untangling"]
