@@ -13,19 +13,29 @@ This project demonstrates the best practices for refactoring and organizing Djan
 
 ## Project Structure
 ```
-DJANGO-REST-API-UNTANGLING/
-│
-├── django_rest_api_untangling/
-│ ├── src/
-│ │ ├── init.py
-│ │ ├── LoggerHelper.py
-│ │ ├── StatusMsg.py
-│ │ ├── django_rest_api_untangler.py
-│ ├── docs/
-│ ├── tests/
-│ ├── pyproject.toml
-│ ├── README.md
-│ ├── main.py
+DJANGO-REST-API-UNTANGLING
+├── django_rest_api_untangling
+│   └── src
+│       ├── __init__.py
+│       ├── api_client.py
+│       ├── django_rest_api_untangler.py
+│       ├── enums.py
+│       ├── LoggerHelper.py
+│       ├── query_objects.py
+│       ├── StatusMsg.py
+│       ├── update_object_in_database.py
+│       ├── __init__.py
+│       └── main.py
+├── docs
+│   ├── README.md
+│   ├── technical_task_REFACTORED.py
+│   └── technical_task.py
+├── tests
+├── docker-compose.yml
+├── Dockerfile
+├── poetry.lock
+├── pyproject.toml
+└── README.md
 ```
 
 ## Installation
