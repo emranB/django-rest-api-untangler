@@ -46,27 +46,27 @@ class StatusMsg:
     @staticmethod
     def success(msg: str, data: Optional[Dict[str, Any]] = None) -> HttpResponse:
         logger_helper.log_info(msg)
-        return JsonResponse({"success": True, "message": msg, "data": data}, status=200)
+        return JsonResponse({"success": True, "message": msg, "data": data}, status=enums.StatusCodes.SUCCESS.value)
 
     @staticmethod
     def warning(msg: str) -> HttpResponse:
         logger_helper.log_warning(msg)
-        return JsonResponse({"success": False, "message": msg}, status=422)
+        return JsonResponse({"success": False, "message": msg}, status=enums.StatusCodes.WARNING.value)
 
     @staticmethod
     def not_found(msg: str) -> HttpResponse:
         logger_helper.log_warning(msg)
-        return JsonResponse({"success": False, "message": msg}, status=404)
+        return JsonResponse({"success": False, "message": msg}, status=enums.StatusCodes.NOT_FOUND.value)
 
     @staticmethod
     def error(msg: str) -> HttpResponse:
         logger_helper.log_error(msg)
-        return JsonResponse({"success": False, "message": msg}, status=500)
+        return JsonResponse({"success": False, "message": msg}, status=enums.StatusCodes.ERROR.value)
 
     @staticmethod
     def exception(msg: str) -> HttpResponse:
         logger_helper.log_exception(msg)
-        return JsonResponse({"success": False, "message": msg}, status=500)
+        return JsonResponse({"success": False, "message": msg}, status=enums.StatusCodes.EXCEPTION.value)
 
 """
 API Manager class
@@ -79,21 +79,21 @@ class ApiManager:
     def rest_endpoint(self, input_data: 'Input') -> HttpResponse:
         try:
             obj_response = self._fetch_object(input_data.id)
-            if obj_response.status_code != 200:
+            if obj_response.status_code != enums.StatusCodes.SUCCESS.value:
                 return obj_response
 
             obj = obj_response.json().get('data')
 
             validation_response = self._validate_input(input_data)
-            if validation_response.status_code != 200:
+            if validation_response.status_code != enums.StatusCodes.SUCCESS.value:
                 return validation_response
 
             update_response = self._update_object_attributes(obj, input_data)
-            if update_response.status_code != 200:
+            if update_response.status_code != enums.StatusCodes.SUCCESS.value:
                 return update_response
 
             finalize_response = self._finalize_object(obj, input_data)
-            if finalize_response.status_code != 200:
+            if finalize_response.status_code != enums.StatusCodes.SUCCESS.value:
                 return finalize_response
 
             return StatusMsg.success(f"Object {obj['id']} successfully processed", data=obj)
@@ -139,7 +139,7 @@ class ApiManager:
         try:
             with transaction.atomic():
                 response = api_client.post(obj, input_data)
-                if response.status != 200:
+                if response.status != enums.StatusCodes.SUCCESS.value:
                     return StatusMsg.error(f"API client post failed with status: {response.status}")
                 update_object_in_database.update_object_in_database(obj, input_data.details)
                 obj.save()
