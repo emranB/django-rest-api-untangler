@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "django-rest-api-untangling"
+version = "0.1.0"
+description = ""
+authors = ["Emran Billah <emran@drinkable.tech>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+django = "^3.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+django-rest-api-untangling = "main:main"
