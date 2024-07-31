@@ -57,9 +57,15 @@ poetry install
 ```
 
 ## Usage
-To run the code, execute the following command:
+To run the code:
+1. Execute the following command from root of project using poetry
 ```
 poetry run django-rest-api-untangling
+```
+OR
+2. Execute the following command from root of project using docker compose
+```
+docker compose -f docker-compose.yml up --build
 ```
 
 With these updates, the project structure and code organization are improved, making the code more modular, maintainable, and easier to understand. The README.md file is also updated to reflect the changes, and the Docker configuration ensures the application can be easily containerized and run in any environment.
