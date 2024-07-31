@@ -16,16 +16,16 @@ This project demonstrates the best practices for refactoring and organizing Djan
 DJANGO-REST-API-UNTANGLING
 ├── django_rest_api_untangling
 │   └── src
-│       ├── __init__.py
-│       ├── api_client.py
-│       ├── django_rest_api_untangler.py
-│       ├── enums.py
-│       ├── LoggerHelper.py
-│       ├── query_objects.py
-│       ├── StatusMsg.py
-│       ├── update_object_in_database.py
-│       ├── __init__.py
-│       └── main.py
+│   │   ├── __init__.py
+│   │   ├── api_client.py
+│   │   ├── django_rest_api_untangler.py
+│   │   ├── enums.py
+│   │   ├── LoggerHelper.py
+│   │   ├── query_objects.py
+│   │   ├── StatusMsg.py
+│   │   ├── update_object_in_database.py
+├── ├──__init__.py
+│   └── main.py
 ├── docs
 │   ├── README.md
 │   ├── technical_task_REFACTORED.py
